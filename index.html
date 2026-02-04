@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(주)포더플래닛 - 디지털 유산 관리의 혁신</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            display: block;
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1f2937;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        /* Mission Section */
+        .mission {
+            background: #f8fafc;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .mission-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .mission-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .mission-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .mission-card p {
+            color: #6b7280;
+            line-height: 1.7;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            background: white;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .service-card p {
+            color: #6b7280;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+
+        .service-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .service-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .service-button-full {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            margin-top: auto;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .service-button-full:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Stories Section */
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .story-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .story-profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .story-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f0f9ff, #e0e7ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .story-info h4 {
+            font-size: 1.1rem;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .story-info span {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .story-content {
+            margin-bottom: 1.5rem;
+        }
+
+        .story-content p {
+            color: #4b5563;
+            line-height: 1.7;
+            font-style: italic;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .story-content p::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 2rem;
+            color: #667eea;
+            line-height: 1;
+        }
+
+        .story-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Impact Section */
+        .impact {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .impact .section-title {
+            color: white;
+        }
+
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #60a5fa;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Patents Section */
+        .patents-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .patents-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .patents-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .patent-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            border-top: 4px solid #667eea;
+            text-align: center;
+        }
+
+        .patent-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .patent-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #f0f9ff, #e0e7ff);
+            color: #667eea;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .patent-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .patent-card p {
+            color: #6b7280;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .patent-icon {
+            font-size: 3rem;
+            margin-top: 1rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4b5563;
+        }
+
+        .about-features {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .about-features li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .about-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .about-visual {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-visual::before {
+            content: '⭐';
+            position: absolute;
+            font-size: 6rem;
+            opacity: 0.1;
+            top: -20px;
+            right: -20px;
+        }
+
+        .about-visual::after {
+            content: '📈';
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.1;
+            bottom: -10px;
+            left: -10px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #60a5fa;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #d1d5db;
+            text-decoration: none;
+            line-height: 1.7;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo">(주)포더플래닛</a>
+            <ul class="nav-links">
+                <li><a href="#mission">미션</a></li>
+                <li><a href="#services">서비스</a></li>
+                <li><a href="#reviews">고객 후기</a></li>
+                <li><a href="#impact">임팩트</a></li>
+                <li><a href="#patents">특허</a></li>
+                <li><a href="#about">회사소개</a></li>
+                <li><a href="#contact">문의</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>디지털 유산 관리의<br>혁신을 선도합니다</h1>
+            <p class="hero-subtitle">AI 기반 기술로 가족 간의 연결을 강화하고,<br>소중한 인생 유산을 안전하게 보존하는 미래를 만듭니다</p>
+            <a href="#services" class="cta-button">서비스 둘러보기</a>
+        </div>
+    </section>
+
+    <section id="mission" class="mission">
+        <div class="fade-in">
+            <h2 class="section-title">우리의 미션</h2>
+            <div class="mission-grid">
+                <div class="mission-card">
+                    <div class="mission-icon">🔒</div>
+                    <h3>안전한 보관</h3>
+                    <p>이중 암호화 기술로 소중한 개인정보와 자산 정보를 안전하게 보호하며, 미래 세대를 위한 디지털 유산 관리 표준을 제시합니다.</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">🤝</div>
+                    <h3>가족 연결</h3>
+                    <p>세대 간 디지털 격차를 해소하고, 가족 구성원 간의 정보 단절 문제를 해결하여 더 안전하고 연결된 사회를 만들어갑니다.</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">🚀</div>
+                    <h3>사회적 혁신</h3>
+                    <p>AI 기술을 통해 상속 분쟁을 예방하고, 유실될 수 있는 디지털 자산을 보호하여 사회적 손실을 최소화하는 데 기여합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="fade-in">
+            <h2 class="section-title">주요 서비스</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>라이프 캡슐</h3>
+                    <p>AI 기반의 프라이빗 개인 금고 서비스로, 숨은 자산과 중요 정보를 안전하게 보관하고 비상시 가족에게 자동으로 전달합니다. 4060대 중장년층의 디지털 유산 관리 니즈를 완벽하게 해결합니다.</p>
+                    <a href="https://lifecapsule.kr" class="service-button-full" target="_blank">서비스 이용하기</a>
+                </div>
+                <div class="service-card">
+                    <h3>라이프 캔버스</h3>
+                    <p>셀럽과 명사를 위한 프리미엄 인생 아카이브 서비스입니다. 1:1 전담 컨설팅을 통해 소중한 인생 자료를 고품격 방식으로 수집하고, 디지털 북, 인생 기념관, 다큐 영상, 자서전 등 다양한 형태로 영구 보존합니다.</p>
+                    <div style="margin-top: auto; padding: 1rem; background: rgba(102, 126, 234, 0.1); border-radius: 10px; font-size: 0.9rem; color: #1f2937; text-align: center;">
+                        프리미엄 맞춤 상담 및 전문 기록물 관리 서비스 제공
+                    </div>
+                </div>
+                <div class="service-card">
+                    <h3>특별한 유산</h3>
+                    <p>개인의 소중한 기록과 추억을 디지털화하여 영구 보존하는 서비스입니다. 유언장, 연명의료의향서, 인생 스토리 등을 체계적으로 관리할 수 있습니다.</p>
+                    <div style="margin-top: auto; padding: 1rem; background: rgba(102, 126, 234, 0.1); border-radius: 10px; font-size: 0.9rem; color: #1f2937; text-align: center;">
+                        개인 맞춤형 디지털 유산 보존 서비스 제공
+                    </div>
+                </div>
+                <div class="service-card">
+                    <h3>디지털 상속 컨설팅</h3>
+                    <p>법무법인과의 파트너십을 통해 디지털 자산의 법적 효력 있는 상속 절차를 지원하고, 개인 맞춤형 유산 관리 전략을 제공합니다.</p>
+                    <div style="margin-top: auto; padding: 1rem; background: rgba(102, 126, 234, 0.1); border-radius: 10px; font-size: 0.9rem; color: #1f2937; text-align: center;">
+                        전문 법률 파트너와 함께하는 상속 절차 지원 서비스
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews">
+        <div class="fade-in">
+            <h2 class="section-title">고객 후기</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: #6b7280; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                포더플래닛과 함께 유산 관리의 어려움을 극복하고 가족 간의 소중한 연결을 되찾은 고객들의 진솔한 이야기를 소개합니다.
+            </p>
+            <div class="stories-grid">
+                <div class="story-card">
+                    <div class="story-profile">
+                        <div class="story-avatar">👨‍💼</div>
+                        <div class="story-info">
+                            <h4>김○○님 (56세, 중소기업 대표)</h4>
+                            <span>서울시 강남구</span>
+                        </div>
+                    </div>
+                    <div class="story-content">
+                        <p>"사업을 하다 보니 여러 곳에 분산된 자산들이 많았는데, 갑작스러운 사고가 생기면 가족들이 어떻게 해야 할지 막막했어요. 라이프 캡슐을 통해 모든 정보를 체계적으로 정리하고 나니, 마음의 짐이 한결 가벼워졌습니다. 이제 가족들과도 미래에 대해 자연스럽게 대화할 수 있게 되었어요."</p>
+                    </div>
+                    <div class="story-tags">
+                        <span class="tag">사업자산 관리</span>
+                        <span class="tag">가족 소통</span>
+                    </div>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-profile">
+                        <div class="story-avatar">👩‍🏫</div>
+                        <div class="story-info">
+                            <h4>박○○님 (62세, 퇴직 교사)</h4>
+                            <span>부산시 해운대구</span>
+                        </div>
+                    </div>
+                    <div class="story-content">
+                        <p>"혼자 사는 어머니가 갑자기 쓰러지셨을 때, 어머니의 통장이나 중요한 서류들이 어디 있는지 몰라서 정말 힘들었어요. 그 경험 이후 저도 미리 준비해야겠다는 생각이 들었습니다. 포더플래닛 덕분에 제 모든 정보를 안전하게 보관하고, 자녀들에게도 안심을 줄 수 있게 되었어요."</p>
+                    </div>
+                    <div class="story-tags">
+                        <span class="tag">1인 가구</span>
+                        <span class="tag">미래 준비</span>
+                    </div>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-profile">
+                        <div class="story-avatar">👨‍💻</div>
+                        <div class="story-info">
+                            <h4>이○○님 (45세, IT 전문직)</h4>
+                            <span>경기도 성남시</span>
+                        </div>
+                    </div>
+                    <div class="story-content">
+                        <p>"암호화폐와 해외 투자 등 디지털 자산이 많은 편인데, 아내나 아이들은 이런 것들을 잘 모르거든요. 혹시 제게 무슨 일이 생기면 이 모든 자산들이 묻힐 수도 있다는 걱정이 컸어요. 라이프 캡슐의 AI 분석 기능으로 복잡한 투자 정보도 가족이 이해하기 쉽게 정리되니까, 정말 고마워요."</p>
+                    </div>
+                    <div class="story-tags">
+                        <span class="tag">디지털 자산</span>
+                        <span class="tag">세대 격차 해소</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="impact" class="impact">
+        <div class="fade-in">
+            <h2 class="section-title">사회적 임팩트</h2>
+            <div class="impact-stats">
+                <div class="stat-card">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">사망자 디지털 자산<br>가족 접근 불가 비율 감소 목표</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1조원</div>
+                    <div class="stat-label">국내 디지털 유산 관리<br>시장 잠재 규모</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4+</div>
+                    <div class="stat-label">보유 특허 수<br>(인생기념관, 디지털유언장 등)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="patents">
+        <div class="fade-in">
+            <h2 class="section-title">보유 특허 기술</h2>
+            <p style="text-align: center; font-size: 1.1rem; color: #6b7280; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                포더플래닛은 디지털 유산 관리 분야의 핵심 기술들을 특허로 보유하고 있으며, 지속적인 기술 혁신을 통해 고객에게 최상의 서비스를 제공합니다.
+            </p>
+            <div class="patents-grid">
+                <div class="patent-card">
+                    <div class="patent-number">특허 제10-2494660호</div>
+                    <h3>메모리얼 스토리</h3>
+                    <p>인생기록관 및 추모관 서비스</p>
+                    <div class="patent-icon">📖</div>
+                </div>
+                <div class="patent-card">
+                    <div class="patent-number">특허 제10-2635101호</div>
+                    <h3>특별한 유산</h3>
+                    <p>디지털 유산 기록 서비스</p>
+                    <div class="patent-icon">💎</div>
+                </div>
+                <div class="patent-card">
+                    <div class="patent-number">특허 제10-2834469호</div>
+                    <h3>패밀리허브</h3>
+                    <p>가족공유가 가능하도록 가계도를 접목시킨 디지털 유산 기록 서비스</p>
+                    <div class="patent-icon">👨‍👩‍👧‍👦</div>
+                </div>
+                <div class="patent-card">
+                    <div class="patent-number">특허 제10-2025-0108293호</div>
+                    <h3>라이프 캡슐</h3>
+                    <p>AI기반 사적자산 및 중요정보 저장 전달 서비스</p>
+                    <div class="patent-icon">💊</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="fade-in">
+            <h2 class="section-title">회사 소개</h2>
+            <div class="about-content">
+                <div>
+                    <p class="about-text">
+                        (주)포더플래닛은 2020년 설립된 디지털 유산 관리 전문 기업입니다. 
+                        우리는 AI 기술과 강력한 보안 시스템을 바탕으로 개인의 소중한 정보와 자산을 안전하게 보관하고, 
+                        가족 간의 연결을 강화하는 혁신적인 서비스를 제공합니다.
+                    </p>
+                    <ul class="about-features">
+                        <li>특허 기술 보유 (메모리얼 스토리, 특별한 유산, 패밀리허브, 라이프 캡슐)</li>
+                        <li>사회적기업 성장지원센터 입주기업</li>
+                        <li>예비창업패키지 및 재창업성공패키지 선정</li>
+                        <li>소셜벤처 판별 (기술보증기금)</li>
+                        <li>데이터 바우처/클라우드 바우처 지원 사업 선정</li>
+                        <li>O-Prize Demo-day 최우수상 수상</li>
+                        <li>창업진흥원 제10회 Re:born IR 최종 선정</li>
+                    </ul>
+                </div>
+                <div class="about-visual">
+                    🎯
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="footer-section">
+                    <h4>회사 정보</h4>
+                    <p>(주)포더플래닛<br>
+                    사업자등록번호: 361-86-02004<br>
+                    대표이사: 진명산</p>
+                </div>
+                <div class="footer-section">
+                    <h4>연락처</h4>
+                    <p>이메일: admin@fortheplanet.co.kr<br>
+                    주소: 서울시 강남구 봉은사로 317</p>
+                </div>
+                <div class="footer-section">
+                    <h4>서비스</h4>
+                    <p>메모리얼 스토리<br>
+                    특별한 유산<br>
+                    패밀리 허브<br>
+                    라이프 캡슐</p>
+                </div>
+                <div class="footer-section">
+                    <h4>지원 기관</h4>
+                    <p>사회적기업 성장지원센터<br>
+                    기술보증기금<br>
+                    창업진흥원</p>
+                </div>
+            </div>
+            <p>&copy; 2024 (주)포더플래닛. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Counter animation for impact stats
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target + (element.textContent.includes('%') ? '%' : 
+                                                    element.textContent.includes('조') ? '조원' : 
+                                                    element.textContent.includes('+') ? '+' : '');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current) + (element.textContent.includes('%') ? '%' : 
+                                                                element.textContent.includes('조') ? '조원' : 
+                                                                element.textContent.includes('+') ? '+' : '');
+                }
+            }, 50);
+        }
+
+        // Trigger counter animation when impact section comes into view
+        const impactObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.stat-number');
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.textContent);
+                        animateCounter(counter, target);
+                    });
+                    impactObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const impactSection = document.querySelector('.impact');
+        if (impactSection) {
+            impactObserver.observe(impactSection);
+        }
+    </script>
+</body>
+</html>
